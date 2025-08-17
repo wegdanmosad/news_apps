@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:news_apps/categories/categories_view.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String routeName = '/home';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(title: Text('Home')),
+      body: CategoriesView(),
+    );
   }
 }
