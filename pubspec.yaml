@@ -67,6 +67,13 @@ flutter:
   assets:
       - assets/image/
       - assets/icons/
+      - assets/image/business_light.png
+      - assets/image/general_light.png
+      - assets/image/entertainment_light.png
+      - assets/image/health_light.png
+      - assets/image/science_light.png
+      - assets/image/sports_light.png
+      - assets/image/technology_light.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:news_apps/api/api_service.dart';
 import 'package:news_apps/app_theme.dart';
+import 'package:news_apps/drawer/settings_provider.dart';
 import 'package:news_apps/models/news_response/news.dart';
 import 'package:news_apps/models/sources_response/source.dart';
 import 'package:news_apps/news/news_item.dart';
 import 'package:news_apps/news/tab_item.dart';
 import 'package:news_apps/widget/error_indicator.dart';
 import 'package:news_apps/widget/loading_indicator.dart';
+import 'package:provider/provider.dart';
 
 class NewsView extends StatefulWidget {
   String categoryId;
@@ -22,6 +24,7 @@ class _NewsViewState extends State<NewsView> {
   late var getSourcesFuture = ApiService.getSources(widget.categoryId);
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return FutureBuilder(
       future: getSourcesFuture,
       builder: (context, snapshot) {
@@ -39,7 +42,9 @@ class _NewsViewState extends State<NewsView> {
                 child: TabBar(
                   isScrollable: true,
                   dividerColor: Colors.transparent,
-                  indicatorColor: AppTheme.white,
+                  indicatorColor: settingsProvider.isDark
+                      ? AppTheme.white
+                      : AppTheme.black,
                   tabAlignment: TabAlignment.start,
                   labelPadding: EdgeInsetsDirectional.only(start: 16),
                   tabs: sources

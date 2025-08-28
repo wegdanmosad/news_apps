@@ -29,16 +29,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppTheme.white),
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
                 ),
                 child: TextField(
                   controller: searchController,
                   autofocus: true,
-                  style: TextStyle(color: AppTheme.white),
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
                   decoration: InputDecoration(
                     hintText: "Search",
                     hintStyle: TextStyle(
-                      color: AppTheme.white,
+                      color: Theme.of(context).hintColor,
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
                     ),
@@ -49,12 +53,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           isSearching = true;
                         });
                       },
-
-                      icon: Icon(Icons.search, color: AppTheme.white),
+                      icon: Icon(
+                        Icons.search,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
                     ),
-
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.close, color: AppTheme.white),
+                      icon: Icon(
+                        Icons.close,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
                       onPressed: () {
                         setState(() {
                           isSearching = false;
@@ -70,6 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
               ),
+
         actions: [
           if (!isSearching)
             IconButton(
@@ -103,46 +112,3 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 }
-/**import 'package:flutter/material.dart';
-import 'package:news_apps/app_theme.dart';
-import 'package:news_apps/news/news_view.dart';
-
-class HomeScreen extends StatefulWidget {
-  static const String routeName = "home";
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  String searchQuery = ""; // ✅ this will be shared with NewsView
-  String selectedCategory = "general"; // example default category
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: TextField(
-          decoration: InputDecoration(
-            hintText: "Search news...",
-            hintStyle: TextStyle(color: Colors.white70),
-            border: InputBorder.none,
-            prefixIcon: Icon(Icons.search, color: Colors.white),
-          ),
-          style: TextStyle(color: Colors.white),
-          onChanged: (value) {
-            setState(() {
-              searchQuery = value;
-            });
-          },
-        ),
-        backgroundColor: AppTheme.primary,
-      ),
-      body: NewsView(
-        categoryId: selectedCategory,
-        searchQuery: searchQuery, // ✅ pass it down
-      ),
-    );
-  }
-}
- */

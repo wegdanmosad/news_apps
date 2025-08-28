@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:news_apps/app_theme.dart';
+import 'package:news_apps/drawer/settings_provider.dart';
 import 'package:news_apps/models/news_response/news.dart';
+import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:url_launcher/url_launcher.dart';
 
@@ -11,6 +13,7 @@ class NewsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return InkWell(
       onTap: () {
         showModalBottomSheet(
@@ -29,7 +32,9 @@ class NewsItem extends StatelessWidget {
                   child: Container(
                     padding: EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: settingsProvider.isDark
+                          ? AppTheme.white
+                          : AppTheme.black,
                       borderRadius: BorderRadius.circular(24),
                     ),
                     child: SingleChildScrollView(
@@ -51,14 +56,20 @@ class NewsItem extends StatelessWidget {
                           Text(
                             news.description ?? "No description available",
                             style: textTheme.titleSmall!.copyWith(
-                              color: AppTheme.black,
+                              color: settingsProvider.isDark
+                                  ? AppTheme.black
+                                  : AppTheme.white,
                             ),
                           ),
                           SizedBox(height: 20),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppTheme.black,
-                              foregroundColor: Colors.white,
+                              backgroundColor: settingsProvider.isDark
+                                  ? AppTheme.black
+                                  : AppTheme.white,
+                              foregroundColor: settingsProvider.isDark
+                                  ? AppTheme.black
+                                  : AppTheme.white,
                               minimumSize: Size(double.infinity, 50),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(16),
@@ -80,7 +91,9 @@ class NewsItem extends StatelessWidget {
                                       content: Text(
                                         'Cannot open the article!',
                                         style: textTheme.titleMedium!.copyWith(
-                                          color: AppTheme.white,
+                                          color: settingsProvider.isDark
+                                              ? AppTheme.black
+                                              : AppTheme.white,
                                         ),
                                       ),
                                     ),
@@ -91,7 +104,9 @@ class NewsItem extends StatelessWidget {
                             child: Text(
                               'View Full Article',
                               style: textTheme.titleMedium!.copyWith(
-                                color: AppTheme.white,
+                                color: settingsProvider.isDark
+                                    ? AppTheme.white
+                                    : AppTheme.black,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -110,7 +125,9 @@ class NewsItem extends StatelessWidget {
         padding: EdgeInsets.all(8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppTheme.white),
+          border: Border.all(
+            color: settingsProvider.isDark ? AppTheme.white : AppTheme.black,
+          ),
         ),
         child: Column(
           children: [
@@ -127,7 +144,11 @@ class NewsItem extends StatelessWidget {
             SizedBox(height: 10),
             Text(
               news.title ?? "No title available",
-              style: textTheme.titleMedium!.copyWith(color: AppTheme.white),
+              style: textTheme.titleMedium!.copyWith(
+                color: settingsProvider.isDark
+                    ? AppTheme.white
+                    : AppTheme.black,
+              ),
             ),
             SizedBox(height: 10),
             Row(
