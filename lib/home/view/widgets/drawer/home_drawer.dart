@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:news_apps/app_theme.dart';
-import 'package:news_apps/drawer/settings_provider.dart';
+import 'package:news_apps/home/view/widgets/drawer/settings_provider.dart';
 import 'package:provider/provider.dart';
 
 class HomeDrawer extends StatelessWidget {

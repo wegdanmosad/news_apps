@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_apps/categories/category_item.dart';
-import 'package:news_apps/models/category_model.dart';
+import 'package:news_apps/categories/view/widgets/category_item.dart';
+import 'package:news_apps/categories/data/models/category_model.dart';
 
 class CategoriesView extends StatelessWidget {
   CategoriesView({required this.onCategorySelected});
