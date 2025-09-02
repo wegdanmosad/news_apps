@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:news_apps/app_theme.dart';
+import 'package:news_apps/shared/app_theme.dart';
 import 'package:news_apps/home/view/widgets/drawer/settings_provider.dart';
 import 'package:news_apps/news/data/models/news.dart';
 import 'package:news_apps/sources/data/models/source.dart';
@@ -9,8 +9,8 @@ import 'package:news_apps/news/view_model/news_view_model.dart';
 import 'package:news_apps/news/view/widgets/news_item.dart';
 import 'package:news_apps/sources/view/widgets/tab_item.dart';
 import 'package:news_apps/sources/view_model/sources_view_model.dart';
-import 'package:news_apps/widget/error_indicator.dart';
-import 'package:news_apps/widget/loading_indicator.dart';
+import 'package:news_apps/shared/widget/error_indicator.dart';
+import 'package:news_apps/shared/widget/loading_indicator.dart';
 import 'package:provider/provider.dart';
 
 class NewsView extends StatefulWidget {

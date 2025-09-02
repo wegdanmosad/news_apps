@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_apps/app_theme.dart';
+import 'package:news_apps/shared/app_theme.dart';
 
 class LoadingIndicator extends StatelessWidget {
   @override

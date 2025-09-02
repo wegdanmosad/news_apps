@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:news_apps/api/api_constants.dart';
+import 'package:news_apps/shared/api_constants.dart';
 import 'package:news_apps/news/data/models/news_response.dart';
 import 'package:news_apps/sources/data/models/sources_response.dart';
 

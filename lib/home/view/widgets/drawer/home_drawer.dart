@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:news_apps/app_theme.dart';
+import 'package:news_apps/shared/app_theme.dart';
 import 'package:news_apps/home/view/widgets/drawer/settings_provider.dart';
 import 'package:provider/provider.dart';
 
