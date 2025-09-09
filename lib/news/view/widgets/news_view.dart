@@ -1,6 +1,6 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_apps/news/view_model/news_states.dart';
 import 'package:news_apps/shared/app_theme.dart';
 import 'package:news_apps/home/view/widgets/drawer/settings_provider.dart';
 import 'package:news_apps/news/data/models/news.dart';
@@ -8,6 +8,7 @@ import 'package:news_apps/sources/data/models/source.dart';
 import 'package:news_apps/news/view_model/news_view_model.dart';
 import 'package:news_apps/news/view/widgets/news_item.dart';
 import 'package:news_apps/sources/view/widgets/tab_item.dart';
+import 'package:news_apps/sources/view_model/source_states.dart';
 import 'package:news_apps/sources/view_model/sources_view_model.dart';
 import 'package:news_apps/shared/widget/error_indicator.dart';
 import 'package:news_apps/shared/widget/loading_indicator.dart';
@@ -36,17 +37,18 @@ class _NewsViewState extends State<NewsView> {
   @override
   Widget build(BuildContext context) {
     SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
-    return ChangeNotifierProvider(
+    return BlocProvider(
       create: (_) => sourcesViewModel,
-      child: Consumer<SourcesViewModel>(
-        builder: (_, viewModel, __) {
-          if (viewModel.isLoading) {
+      child: BlocBuilder<SourcesViewModel,SourceStates>(
+        builder: (context, state) {
+           BlocProvider.of<SourcesViewModel>(context);
+          if (state is GetSourcesLoading) {
             return LoadingIndicator();
-          } else if (viewModel.errorMessage != null) {
-            return ErrorIndicator(viewModel.errorMessage!);
-          } else {
-            List<Source> sources = viewModel.sources;
-            newsViewModel.getNews(viewModel.sources[currentIndex].id!);
+          } else if (state is GetSourcesError) {
+            return ErrorIndicator(state.massegae);
+          } else if(state is GetSourcesSuccess) {
+            List<Source> sources = state.sources.cast<Source>();
+            newsViewModel.getNews(state.sources[currentIndex].id!);
             return Column(
               children: [
                 DefaultTabController(
@@ -75,16 +77,16 @@ class _NewsViewState extends State<NewsView> {
                   ),
                 ),
                 Expanded(
-                  child: ChangeNotifierProvider.value(
-                    value: newsViewModel,
-                    child: Consumer<NewsViewModel>(
-                      builder: (_, viewModel, _) {
-                        if (viewModel.isLoading) {
+                  child: BlocProvider(
+                    create:(_)=> newsViewModel,
+                    child: BlocBuilder<NewsViewModel,NewsStates>(
+                      builder: (_,state) {
+                        if (state is GetNewsLoading) {
                           return LoadingIndicator();
-                        } else if (viewModel.errorMessage != null) {
-                          return ErrorIndicator(viewModel.errorMessage!);
-                        } else {
-                          List<News> newsList = viewModel.newsList;
+                        } else if (state is GetNewsError) {
+                          return ErrorIndicator(state.massegae);
+                        } else if(state is GetNewsSuccess){
+                          List<News> newsList = state.newsList;
                           return ListView.separated(
                             padding: EdgeInsets.only(
                               top: 16,
@@ -96,6 +98,8 @@ class _NewsViewState extends State<NewsView> {
                             separatorBuilder: (_, _) => SizedBox(height: 16),
                             itemCount: newsList.length,
                           );
+                        }else{
+                          return SizedBox();
                         }
                       },
                     ),
@@ -103,6 +107,8 @@ class _NewsViewState extends State<NewsView> {
                 ),
               ],
             );
+          }else{
+            return SizedBox();
           }
         },
       ),

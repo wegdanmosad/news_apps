@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_apps/shared/app_bloc_observer.dart';
 import 'package:news_apps/shared/app_theme.dart';
 import 'package:news_apps/home/view/widgets/drawer/settings_provider.dart';
 import 'package:news_apps/home/view/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+Bloc.observer=AppBlocObserver();
   runApp(
     MultiProvider(
       providers: [ChangeNotifierProvider(create: (_) => SettingsProvider())],
